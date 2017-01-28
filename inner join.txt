@@ -1,0 +1,37 @@
+
+
+SELECT anime_name, GROUP_CONCAT( actors_id
+SEPARATOR  ", " ) 
+FROM Anime a
+INNER JOIN Anime_actors b ON a.anime_id = b.anime_id
+GROUP BY Anime_name
+
+
+SELECT a.anime_name, GROUP_CONCAT( c.actor_name
+SEPARATOR  ", " ) AS Actors
+FROM Anime a
+INNER JOIN Anime_actors b ON a.anime_id = b.anime_id
+INNER JOIN Actors c ON b.actors_id = c.actors_id 
+GROUP BY Anime_name
+
+
+
+SELECT a.anime_name, GROUP_CONCAT( DISTINCT c.actor_name
+SEPARATOR  ", " ) AS Actors,
+GROUP_CONCAT( DISTINCT e.type
+SEPARATOR  ", " ) AS Genre
+FROM Anime a
+INNER JOIN Anime_actors b ON a.anime_id = b.anime_id
+INNER JOIN Actors c ON b.actors_id = c.actors_id
+INNER JOIN Anime_genre d ON a.anime_id = d.anime_id
+INNER JOIN Genre e on d.genre_id = e.genre_id
+GROUP BY Anime_name
+
+SELECT *,GROUP_CONCAT( DISTINCT ac.actor_name SEPARATOR  ', ' ) AS Actors, GROUP_CONCAT( DISTINCT g.type SEPARATOR  ', ' ) AS Genre 
+			FROM Anime an
+			INNER JOIN Anime_genre ag ON an.anime_id = ag.anime_id
+			INNER JOIN Genre g ON ag.genre_id = g.genre_id
+			INNER JOIN Anime_actors aa ON an.anime_id = aa.anime_id
+			INNER JOIN Actors ac ON aa.actors_id = ac.actors_id
+			WHERE anime_name LIKE :search_term OR g.type LIKE :search_term OR ac.actor_name LIKE :search_term
+			ORDER BY anime_name ".$_GET['sort'])

@@ -1,0 +1,163 @@
+<html>
+<head>	
+<title>Tables Page</title> 
+<link rel="stylesheet" type="text/css" href="Style.css" />
+</head>
+<body>
+    
+    <div class="img"/> 
+<?php
+require_once("Design.inc.php"); 
+?>
+
+<?php //Anime
+Design::tableAnime(); 
+//    include("Connect.inc.html");
+//    $query = $conn->prepare("SELECT * FROM Anime");//Calling this specific query from the database
+//    $query->execute();
+//    $Animes=$query->fetchAll();//Fetch the result from the query
+//    
+//    echo '<table width="1500"><caption>Anime</caption>';
+//    echo '<tr><th>Anime ID</th><th>Name</th><th>Epsiodes</th><th>Release Date</th><th>Description</th><th>Picture</th><tr>'; //Open table make headers
+//   
+//    foreach ($Animes as $Anime) //Loop to display all the data until the last one
+//
+//    {
+//	echo "<tr>";
+//	
+//	echo "<td>".$Anime['anime_id']."</td>"; //Display the information selected from the database
+//	echo "<td>".$Anime['anime_name']."</td>";
+//	echo "<td>".$Anime['episodes']."</td>";
+//	echo "<td>".$Anime['description']."</td>";
+//	echo "<td>".$Anime['release_date']."</td>";
+//	echo '<td><img src="data:image/jpg;base64,'.base64_encode($Anime ['picture']).'"/></td>';
+//
+//	echo "</tr>";    
+//    } 						
+//    
+//    echo "</table>"; //Close table
+?>    
+
+<br>
+    
+</br>
+
+<?php  //Actors
+
+    include("Connect.inc.html");
+    
+    $query = $conn->prepare("SELECT * FROM Actors");//Calling this specific query from the database
+    $query->execute();
+    $VActor=$query->fetchAll();//Fetch the result from the query
+    
+    echo '<table width="1000"><caption>Actors</caption>';
+    echo "<tr><th>Actors ID</th><th>Name</th><th>Date of Birth</th><th>Age</th></tr>"; //Open table make headers
+   
+    foreach ($VActor as $Actors) //Loop to display all the data until the last one
+    {
+	echo "<tr>";
+	
+	echo "<td>".$Actors['actors_id']."</td>";
+	echo "<td>".$Actors['actor_name']."</td>";
+	echo "<td>".$Actors['dob']."</td>";
+	echo "<td>".$Actors['age']."</td>"; //Display the information selected from the database
+	
+	echo "</tr>";
+	
+	//echo "<tr><td>".$Actors->actors_id."</td><td>".$Actors->actor_name."</td><td>".$Actors->dob."</td><td>".$Actors->age."</td></tr>";
+    } 
+    
+    echo "</table>"; //Close table
+?>    
+
+<br>
+    
+</br>
+
+<?php  //Genre
+    
+    include("Connect.inc.html");
+
+    $query = $conn->prepare("SELECT * FROM Genre");//Calling this specific query from the database
+    $query->execute();
+    $Genres=$query->fetchAll();//Fetch the result from the query
+    
+    echo '<table width="400"><caption>Genre</caption>';
+    echo "<tr><th>Genre ID</th><th>Genre Type</th></tr>"; //Open table make headers
+   
+    foreach ($Genres as $Genre) //Loop to display all the data until the last one
+    {
+	
+	echo "<tr>";
+	
+	echo "<td>".$Genre['genre_id']."</td>"; //Display the information selected from the database
+	echo "<td>".$Genre['type']."</td>";
+	
+	echo "</tr>";
+    }
+    
+    echo "</table>"; //Close table
+?>    
+
+<br>
+    
+</br>
+    
+<?php //Anime Actor
+
+    include("Connect.inc.html");
+
+    $query = $conn->prepare("SELECT * FROM Anime_actors");//Calling this specific query from the database
+    $query->execute();
+    $JTable1=$query->fetchAll();//Fetch the result from the query
+    
+    echo '<table width="400"><caption>Anime Actors Table</caption>';
+    echo "<tr><th>Anime ID</th><th>Actors ID</th></tr>"; //Open table and make 2 header 
+   
+   foreach ($JTable1 as $Anime_actors) //Loop to display all the data until the end
+
+    {
+	echo "<tr>";
+	
+	echo "<td>".$Anime_actors['anime_id']."</td>"; //Display the information selected from the database
+	echo "<td>".$Anime_actors['actors_id']."</td>";
+	
+	echo "</tr>";
+    } 
+    
+    echo "</table>"; //Close table
+?>
+
+<br>
+    
+</br>
+    
+<?php  //Anime Genre
+
+    include("Connect.inc.html");
+
+    $query = $conn->prepare("SELECT * FROM Anime_genre");//Calling this specific query from the database
+    $query->execute();
+    $JTable2=$query->fetchAll();//Fetch the result from the query
+    
+    echo '<table width="400"><caption>Anime Genre Table</caption>';
+    echo "<tr><th>Anime ID</th><th>Genre ID</th></tr>"; //Open table and make 2 header 
+   
+    foreach ($JTable2 as $Anime_genre) //Loop to display all the data until the end
+
+    {
+	echo "<tr>";
+	
+	echo "<td>".$Anime_genre['anime_id']."</td>"; //Display the information selected from the database
+	echo "<td>".$Anime_genre['genre_id']."</td>";
+	
+	echo "</tr>";
+	
+    }
+    
+    echo "</table>"; //Close table
+?>
+    
+</table>
+</body>
+</html>

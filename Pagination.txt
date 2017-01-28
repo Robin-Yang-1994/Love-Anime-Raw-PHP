@@ -1,0 +1,45 @@
+if (!(isset($numberofpage))) 
+   { 
+      $numberofpage = 2; 
+   } 
+    
+    $rows = $stmt->rowCount();
+    
+    $page_rows = 2;
+    
+    $last = ceil($rows/$page_rows);
+    
+	 if ($numberofpage < 1) 
+   { 
+      $numberofpage = 1; 
+   } 
+       elseif ($numberofpage > $last) 
+   { 
+      $numberofpage = $last; 
+   }
+   
+   $max = 'limit ' .($numberofpage - 1) * $page_rows .',' .$page_rows;
+	
+
+       echo " <--Page $numberofpage of $last-->";
+    
+    if ($numberofpage == 1) 
+ {
+ echo "<a href='detail.php?numberofpage=1'> <<-First</a>";
+ echo " ";
+ $previous = $numberofpage-1;
+ echo " <a href='detail.php?numberofpage=$previous'> <-Previous</a> ";
+ } 
+
+ echo " ---- ";
+ if ($numberofpage == $last) 
+ {
+ } 
+ else {
+ $next = $numberofpage+1;
+ echo " <a href='detail.php?numberofpage=$next'>Next -></a> ";
+ echo " ";
+ echo " <a href='detail.php?numberofpage=$last'>Last ->></a> ";
+ } 
+    
+   }
